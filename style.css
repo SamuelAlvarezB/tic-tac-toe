@@ -1,0 +1,48 @@
+#header {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: 0.1fr 0.1fr 0.1fr;
+    justify-content: center;
+    gap: 0;
+    width: 50%;
+    margin: auto;
+}
+
+.gameCell {
+    height: 10rem;
+    width: 10rem;
+    font-size: 9rem;
+}
+
+#turn {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    background-color: beige;
+    width: 50%;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+#reset {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.win-announce {
+    font-size: 2rem;
+    color: darkgreen;
+}
+
+.confirm-reset {
+    font-weight: bold;
+}
+
+#resetButton {
+    font-size: 1.5rem;
+    background-color: aquamarine;
+}
