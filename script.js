@@ -38,8 +38,14 @@ function game(board, players = []) {
         },
         getTurn() {
             let turnDiv = document.getElementById("turn");
+            let symbolColor = "";
             if (this.active) {
-                turnDiv.innerText = "Actual turn: " + player.name + "(" + player.symbol + ")";
+                if (player.symbol === "X") {
+                    symbolColor = "red-turn"
+                } else {
+                    symbolColor = "blue-turn"
+                }
+                turnDiv.innerHTML = "Turn: " + player.name + " (<span id='" + symbolColor + "'>" + player.symbol + "</span>)";
             } else {
                 turnDiv.innerText = "Game Finished"
             }
@@ -61,6 +67,7 @@ function game(board, players = []) {
             let col3Check = [board.board[0][2], board.board[1][2], board.board[2][2]];
             let diag1Check = [board.board[0][0], board.board[1][1], board.board[2][2]];
             let diag2Check = [board.board[0][2], board.board[1][1], board.board[2][0]];
+            let arrayCheck = row1Check.concat(row2Check, row3Check, col1Check, col2Check, col3Check);
             if (row1Check[0] === row1Check[1] && row1Check[1] === row1Check[2] && row1Check[0] != "" && row1Check[1] != "" && row1Check[2] != "") {
                 winner = player.name;
                 this.finishGame();
@@ -85,7 +92,11 @@ function game(board, players = []) {
             } else if (diag2Check[0] === diag2Check[1] && diag2Check[1] === diag2Check[2] && diag2Check[0] != "" && diag2Check[1] != "" && diag2Check[2] != "") {
                 winner = player.name;
                 this.finishGame();
+            } else if (!arrayCheck.includes("")) {
+                winner = "DRAW";
+                this.finishGame();
             }
+
         },
         finishGame() {
             this.active = false;
@@ -95,7 +106,11 @@ function game(board, players = []) {
             console.log(resetDiv);
             const winAnnounce = document.createElement("p");
             winAnnounce.classList.add("win-announce");
-            winAnnounce.innerText = "The winner is: " + winner;
+            if (winner === "DRAW") {
+                winAnnounce.innerText = winner + "!";
+            } else {
+                winAnnounce.innerText = "The winner is: " + winner;
+            }
             const confirmReset = document.createElement("p");
             confirmReset.classList.add("confirm-reset");
             confirmReset.innerText = "Do you want to restart the game?";
